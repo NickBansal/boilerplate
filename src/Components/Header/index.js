@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { breakPoints, spacing } from '../../utils/constants';
+import { breakPoints, colors, spacing } from '../../utils/constants';
 import HR from '../HR';
 import logo from '../../assets/english-everyday-logo.png';
 
@@ -36,7 +36,7 @@ const Hamburger = styled.div`
 		position: absolute;
 		height: 5px;
 		width: 100%;
-		background: #d3531a;
+		background: ${colors.blue};
 		border-radius: 9px;
 		opacity: 1;
 		left: 0;
@@ -69,6 +69,62 @@ const Hamburger = styled.div`
 	}
 `;
 
+const Links = styled.div`
+	display: none;
+
+	@media (min-width: ${breakPoints.mobileMax}) {
+		display: flex;
+	}
+
+	a {
+		padding: ${spacing.s2};
+		font-size: 1.2rem;
+		color: ${colors.blue};
+		text-decoration: none;
+	}
+`;
+
+const MobileLinks = styled.div`
+	display: flex;
+	padding: ${spacing.s2};
+    flex-direction: column;
+	width: 100%;
+	background: white;
+	position: absolute;
+	top 0;
+	left: 0;
+	height: 100%;
+	animation-name: example;
+  	animation-duration: 1s;
+
+	@media (min-width: ${breakPoints.mobileMax}) {
+		display: none;
+	}
+
+	@keyframes example {
+		from {
+			transform: translateX(100%)
+		}
+		to {
+			transform: translateX(0)
+		}
+	}
+
+	a {
+		font-size: 1.4rem;
+    	padding: ${spacing.s2} 0;
+	}
+`;
+
+const Close = styled.span`
+	position: absolute;
+	right: 50px;
+	top: 20px;
+	font-size: 30px;
+	cursor: pointer;
+	color: ${colors.blue};
+`;
+
 const Header = () => {
 	const [openNavbar, setOpenNavbar] = useState(false);
 
@@ -84,8 +140,26 @@ const Header = () => {
 					<span />
 					<span />
 				</Hamburger>
+				<Links>
+					<a href="/">Home</a>
+					<a href="/">About</a>
+					<a href="/">Courses</a>
+					<a href="/">Blog</a>
+					<a href="/">Contact</a>
+				</Links>
 			</Container>
+
 			<HR />
+			{openNavbar && (
+				<MobileLinks>
+					<Close onClick={() => setOpenNavbar(false)}>X</Close>
+					<a href="/">Home</a>
+					<a href="/">About</a>
+					<a href="/">Courses</a>
+					<a href="/">Blog</a>
+					<a href="/">Contact</a>
+				</MobileLinks>
+			)}
 		</>
 	);
 };
