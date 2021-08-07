@@ -14,7 +14,7 @@ const Container = styled.div`
 `;
 
 const Hamburger = styled.div`
-	width: 50px;
+	width: 40px;
 	height: 45px;
 	position: relative;
 	-webkit-transform: rotate(0deg);
@@ -50,19 +50,19 @@ const Hamburger = styled.div`
 		transition: 0.25s ease-in-out;
 
 		&:nth-child(1) {
-			top: ${({ openNavbar }) => (openNavbar ? '10px' : '0')};
+			top: ${({ openNavbar }) => (openNavbar ? '10px' : '8px')};
 			transform: ${({ openNavbar }) =>
 				openNavbar ? 'rotate(135deg)' : '0'};
 		}
 
 		&:nth-child(2) {
-			top: 13px;
+			top: 20px;
 			opacity: ${({ openNavbar }) => (!openNavbar ? '1' : '0')};
 			left: ${({ openNavbar }) => (openNavbar ? '-60px' : '0')};
 		}
 
 		&:nth-child(3) {
-			top: ${({ openNavbar }) => (openNavbar ? '11px' : '26px')};
+			top: ${({ openNavbar }) => (openNavbar ? '11px' : '32px')};
 			transform: ${({ openNavbar }) =>
 				openNavbar ? 'rotate(-135deg)' : '0'};
 		}
@@ -87,15 +87,15 @@ const Links = styled.div`
 const MobileLinks = styled.div`
 	display: flex;
 	padding: ${spacing.s2};
-    flex-direction: column;
+	flex-direction: column;
 	width: 100%;
 	background: white;
 	position: absolute;
-	top 0;
+	top: 100px;
 	left: 0;
 	height: 100%;
 	animation-name: example;
-  	animation-duration: 1s;
+	animation-duration: 1s;
 
 	@media (min-width: ${breakPoints.mobileMax}) {
 		display: none;
@@ -103,26 +103,19 @@ const MobileLinks = styled.div`
 
 	@keyframes example {
 		from {
-			transform: translateX(100%)
+			transform: translateX(100%);
 		}
 		to {
-			transform: translateX(0)
+			transform: translateX(0);
 		}
 	}
 
 	a {
 		font-size: 1.4rem;
-    	padding: ${spacing.s2} 0;
+		padding: ${spacing.s2} 0;
+		color: ${colors.blue};
+		text-decoration: none;
 	}
-`;
-
-const Close = styled.span`
-	position: absolute;
-	right: 50px;
-	top: 20px;
-	font-size: 30px;
-	cursor: pointer;
-	color: ${colors.blue};
 `;
 
 const Header = () => {
@@ -152,7 +145,6 @@ const Header = () => {
 			<HR />
 			{openNavbar && (
 				<MobileLinks>
-					<Close onClick={() => setOpenNavbar(false)}>X</Close>
 					<a href="/">Home</a>
 					<a href="/">About</a>
 					<a href="/">Courses</a>
